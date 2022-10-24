@@ -29,6 +29,15 @@ app.get("/userId/:id/userName/:name", (req, res) => {
 app.post('/user',(req, res)=>{
         const name = req.body.name;
         res.send(`welcome ${name}`);
+});
+app.get('/register',(req, res)=>{
+
+        res.sendFile(__dirname + "/views/register.html");
+});
+app.post('/register',(req, res)=>{
+    const name = req.body.fullName;
+    const age = req.body.age;
+    res.send(`<h1>I am  ${name} and I am  ${age} years old</h1>`);
 })
 
 app.listen(PORT,hostName,()=>{
