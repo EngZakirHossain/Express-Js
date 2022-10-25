@@ -1,3 +1,9 @@
+//Application level middleware
+//third party middleware  (body-parser,cookie-parser)
+//Error Handling  middleware
+//Router Handling  middleware
+//Build-in  middleware(express.json, express.urlencoded)
+
 const express = require('express');
 const app = express();
 
@@ -8,6 +14,14 @@ const myMiddleWare =  (req,res,next)=>{
    next();
 };
 app.use(myMiddleWare);
+app.use((req, res, next) =>{
+   res.send('404 Bad url request');
+});
+
+app.use((err, req, res, next) => {
+   console.error(err.stack)
+   res.status(500).send('Something broke!');
+});
 
 app.get('/',myMiddleWare,(req, res)=>{
    res.send("App Running Now"+ req.currentTime);
